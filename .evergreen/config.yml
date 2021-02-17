@@ -1,0 +1,38 @@
+# Run previous commits to pinpoint a failure's origin.
+stepback: true
+
+# Mark failures other than test failures with a purple box.
+command_type: system
+
+# Limit maximum test running time.
+exec_timeout_secs: 3600
+
+axes:
+  - id: foo
+    values:
+      - id: bar
+
+functions:
+  "do it":
+    - command: git.get_project
+      params:
+        directory: src
+    - command: subprocess.exec
+      params:
+        working_dir: src
+        command: bash run.sh
+
+tasks:
+  - name: do-it
+    tags: ["all"]
+    commands:
+      - func: "do it"
+
+buildvariants:
+- matrix_name: test
+  matrix_spec:
+    foo: bar
+  display_name: Test
+  tasks:
+    - ".all"
+  run_on: ubuntu1804-small
