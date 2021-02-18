@@ -20,6 +20,10 @@ functions:
     - command: subprocess.exec
       params:
         working_dir: src
+        command: git submodule update --init --recursive
+    - command: subprocess.exec
+      params:
+        working_dir: src
         command: bash run.sh
 
 tasks:
@@ -35,4 +39,4 @@ buildvariants:
   display_name: Test
   tasks:
     - ".all"
-  run_on: ubuntu1804-small
+  run_on: rhel70-small
