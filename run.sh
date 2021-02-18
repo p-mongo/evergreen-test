@@ -9,3 +9,9 @@ RVM_RUBY=ruby-2.7
 set_env_ruby
 
 ruby -v
+
+echo
+cat /etc/resolv.conf
+echo
+
+ruby test-dns.rb
