@@ -24,7 +24,7 @@ functions:
     - command: subprocess.exec
       params:
         working_dir: src
-        command: bash run.sh
+        command: bash run-python.sh
 
 tasks:
   - name: do-it
