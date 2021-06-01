@@ -21,10 +21,13 @@ functions:
       params:
         working_dir: src
         command: git submodule update --init --recursive
-    - command: subprocess.exec
+    - command: shell.exec
       params:
         working_dir: src
-        command: bash run-python.sh
+        script: |
+          export ATLAS_API_USERNAME="${atlas_key}"
+          export ATLAS_API_PASSWORD="${atlas_secret}"
+          bash run-python.sh
 
 tasks:
   - name: do-it
@@ -39,4 +42,4 @@ buildvariants:
   display_name: Test
   tasks:
     - ".all"
-  run_on: ubuntu1804-small
+  run_on: rhel70-small

@@ -8,8 +8,9 @@ base_url = 'https://cloud-dev.mongodb.com/api'
 
 start_time = _time.time()
 counter = 1
-while _time.time() - start_time < 500:
+while _time.time() - start_time < 1500:
     resp = requests.request('GET', '%s/atlas/v1.0/groups' % base_url, auth=auth)
+    #print(resp.json())
     for project in resp.json()['results']:
         resp = requests.request('GET', '%s/atlas/v1.0/groups/%s/clusters' % (base_url, project['id']), auth=auth)
         for cluster in resp.json()['results']:
